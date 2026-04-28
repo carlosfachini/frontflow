@@ -1,6 +1,27 @@
 # FrontFlow
 
+![Version](https://img.shields.io/badge/version-v0.1.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Codex Ready](https://img.shields.io/badge/Codex-ready-black)
+
 FrontFlow is a portable workflow for AI-assisted front-end development. It helps teams turn requests into clear tasks, make decisions before coding, implement with less noise, and review outcomes with technical criteria.
+
+## Start in 30 seconds
+
+Copy this into Codex inside any front-end project:
+
+```txt
+Use FrontFlow workflow.
+
+Objective:
+Create a responsive pricing card component with title, price, features and primary CTA.
+
+First define the task.
+Then implement only what is defined.
+Finally review the result using FrontFlow criteria.
+```
+
+This is the fastest way to test FrontFlow: it forces the agent to define the task before coding, build only what was defined, and review the result with clear criteria.
 
 FrontFlow is not a prompt pack. It is a structured operating flow for people and AI agents working together:
 
@@ -9,6 +30,12 @@ FrontFlow is not a prompt pack. It is a structured operating flow for people and
 3. Task Validator checks scope, assumptions, and acceptance criteria.
 4. Front Implementer makes the front-end change.
 5. Code Reviewer reviews behavior, maintainability, accessibility, and risk.
+
+In plain language:
+
+1. Define the task before coding.
+2. Build only what is defined.
+3. Review with clear criteria.
 
 The goal is practical: fewer vague prompts, fewer context dumps, fewer rewrites.
 
@@ -21,6 +48,22 @@ AI coding often gets expensive because the agent receives too much context too e
 - Reusable templates for task, decision, and review shape.
 - Clear agent handoff rules in `AGENTS.md`.
 - Portable docs and skills that can be copied into any project.
+
+Without FrontFlow:
+
+- Large prompts.
+- Repeated context.
+- Unclear tasks.
+- More retries.
+
+With FrontFlow:
+
+- Task-first workflow.
+- Smaller context.
+- Clearer acceptance criteria.
+- Fewer retries.
+
+The token savings come mainly from reducing rework and repeated context. There is no technical magic: the workflow keeps each step smaller and easier to verify.
 
 ## When To Use
 
@@ -83,19 +126,54 @@ Use Code Reviewer to review the result.
 
 ## Quick Example
 
-User request:
+### Input
 
 ```text
-Improve the empty state of the invoices page.
+Create a short form component for event registration with name, email and phone.
 ```
 
-FrontFlow turns that into a small sequence:
+### Task Output
 
-1. PO Router classifies it as a front-end UX task and asks for the invoices page plus existing empty-state patterns.
-2. Task Generator defines scope: empty-state layout, message, and action. It marks API changes and table refactors out of scope.
-3. Task Validator checks acceptance criteria: empty state appears only after loading, action is keyboard reachable, layout works on small screens.
-4. Front Implementer edits the relevant component and styles only.
-5. Code Reviewer checks behavior, accessibility, responsive layout, and missing verification.
+```md
+Objective:
+Create a reusable event registration form component.
+
+Requirements:
+- Fields: name, email, phone.
+- Primary submit CTA.
+- Responsive layout for small and wide screens.
+- Use existing form, button, spacing, and typography patterns.
+
+Acceptance criteria:
+- Each input has a visible label or accessible name.
+- Email input uses email keyboard/type behavior where supported.
+- Phone input does not break layout with long values.
+- Submit button is keyboard reachable.
+- Empty and invalid states are visually clear.
+```
+
+### Review Output
+
+```md
+Status: Needs small fix
+
+Issues found:
+- Phone input has no accessible label.
+- Mobile spacing is tighter than nearby form patterns.
+
+Validation recommendation:
+- Add an explicit label for phone.
+- Align mobile spacing with existing form components.
+- Re-check keyboard tab order after the fix.
+```
+
+### Flow
+
+1. PO Router classifies the request as a front-end form task.
+2. Task Generator writes the task and acceptance criteria.
+3. Task Validator checks whether the task is ready.
+4. Front Implementer builds only that component.
+5. Code Reviewer checks behavior, accessibility, layout, and verification.
 
 The agent does not need the whole repository at every step. It receives enough context for the current decision, which reduces token use and avoids rework.
 
@@ -110,6 +188,27 @@ Suggested generic usage:
 3. Fill `templates/current-task.md`.
 4. Implement only after validation.
 5. Review with `templates/review-report.md`.
+
+## Recommended GitHub metadata
+
+Description:
+
+```text
+Structured workflow for AI-assisted front-end development.
+```
+
+Topics:
+
+```text
+ai
+frontend
+codex
+workflow
+agents
+developer-tools
+ai-tools
+front-end
+```
 
 ## Version
 
