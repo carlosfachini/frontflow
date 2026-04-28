@@ -39,6 +39,11 @@ In plain language:
 
 The goal is practical: fewer vague prompts, fewer context dumps, fewer rewrites.
 
+FrontFlow's recommended Codex entry point is `frontflow-po`: a compact PO skill
+that turns vague front-end requests into short, validated tasks and recommends
+the next skill route. It borrows the useful part of terse prompting: remove
+filler, keep decisions.
+
 ## Why FrontFlow
 
 AI coding often gets expensive because the agent receives too much context too early, starts coding before decisions are made, or reviews without clear criteria. FrontFlow reduces token use by keeping each step focused.
@@ -47,6 +52,7 @@ AI coding often gets expensive because the agent receives too much context too e
 - Explicit decisions before implementation.
 - Reusable templates for task, decision, and review shape.
 - Clear agent handoff rules in `AGENTS.md`.
+- `frontflow-po` for low-token routing between skills.
 - Portable docs and skills that can be copied into any project.
 
 Without FrontFlow:
@@ -65,6 +71,10 @@ With FrontFlow:
 
 The token savings come mainly from reducing rework and repeated context. There is no technical magic: the workflow keeps each step smaller and easier to verify.
 
+`frontflow-po` does not guarantee automatic execution of other skills in every
+assistant or CLI. It writes the route clearly so the agent can hand off, invoke,
+or continue with the right FrontFlow step in the current environment.
+
 ## When To Use
 
 Use FrontFlow when a front-end request needs clear thinking before code:
@@ -82,11 +92,12 @@ Do not use FrontFlow for tiny edits where intent, scope, and review criteria are
 
 - `AGENTS.md`: agent operating guide.
 - `docs/`: workflow, front-end standards, Sass guidance, decisions, token saving.
-- `skills/`: generic skill specs for any AI CLI or assistant.
-- `adapters/codex/.codex/skills/`: Codex-ready skill folders with `SKILL.md`.
-- `templates/`: current task, decision map, review report, visual summary.
-- `examples/`: small usage examples.
-- `install.sh`: copies FrontFlow files into a target project.
+- `skills/`: canonical generic skill specs for any AI CLI or assistant.
+- `adapters/codex/.codex/skills/`: generated Codex-ready skill folders with `SKILL.md`.
+- `templates/`: current task, decision map, review report, visual summary, front-end checklist.
+- `examples/`: usage examples, including an end-to-end FrontFlow pass.
+- `scripts/sync-codex-skills.sh`: regenerates Codex skills from `skills/`.
+- `install.sh`: copies FrontFlow files into a target project with backups.
 
 ## Install
 
@@ -97,6 +108,12 @@ chmod +x install.sh
 ./install.sh /path/to/your/project
 ```
 
+Use `--force` to skip the confirmation prompt:
+
+```sh
+./install.sh /path/to/your/project --force
+```
+
 This copies:
 
 - `AGENTS.md`
@@ -104,7 +121,21 @@ This copies:
 - `templates/`
 - `adapters/codex/.codex/`
 
+If any destination already exists, it is backed up under
+`.frontflow-backup/YYYYMMDD_HHMMSS/` before being replaced.
+
 It does not install Node, Python, packages, hooks, or background automation.
+
+## Maintain Skills
+
+Edit canonical skills in `skills/*.md`, then regenerate the Codex adapter:
+
+```sh
+scripts/sync-codex-skills.sh
+```
+
+This keeps `adapters/codex/.codex/skills/*/SKILL.md` aligned with the source
+skills and reduces drift.
 
 ## Use With Codex
 
@@ -114,7 +145,14 @@ After running `install.sh`, open the target project with Codex. Codex will see:
 - `.codex/skills/*/SKILL.md` for workflow-specific skills.
 - `templates/` for repeatable outputs.
 
-Recommended sequence:
+Recommended compact entry:
+
+```text
+Use frontflow-po.
+INTENT -> TASK -> VALIDATE -> ROUTE.
+```
+
+Expanded sequence:
 
 ```text
 Use PO Router to classify this request.
@@ -122,6 +160,22 @@ Use Task Generator to write current-task.md.
 Use Task Validator to check the task before implementation.
 Use Front Implementer to make the change.
 Use Code Reviewer to review the result.
+```
+
+Compact before/after:
+
+```text
+Before:
+Make header better on mobile.
+
+After:
+GOAL: improve mobile header nav.
+VALUE: users find pages on 360px+ screens.
+SCOPE: menu open/close, focus, layout.
+OUT: desktop redesign, new deps.
+AC: button has label; ESC closes; focus visible; no overflow at 360px.
+UX: focus visible; menu closes with ESC; no horizontal scroll at 360px.
+ROUTE: front-implementer -> code-reviewer.
 ```
 
 ## Quick Example
@@ -176,6 +230,8 @@ Validation recommendation:
 5. Code Reviewer checks behavior, accessibility, layout, and verification.
 
 The agent does not need the whole repository at every step. It receives enough context for the current decision, which reduces token use and avoids rework.
+
+For a complete pass, see [examples/end-to-end.md](examples/end-to-end.md).
 
 ## Use With Other AI CLIs
 

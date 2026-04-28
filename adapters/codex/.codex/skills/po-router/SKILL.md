@@ -5,29 +5,51 @@ description: Route incoming front-end requests into the correct FrontFlow step b
 
 # PO Router
 
-Classify the request and choose next FrontFlow step.
+Use this skill to classify an incoming request and choose the next FrontFlow step.
 
-Sequence:
+## Goal
 
-```text
-PO Router -> Task Generator -> Task Validator -> Front Implementer -> Code Reviewer
-```
+Prevent premature implementation by identifying request type, missing context, and next action.
+Act like a product owner: clarify outcome, user value, constraints, and success
+criteria before any code path is chosen.
 
-Return:
+## Inputs
+
+- User request
+- Relevant project constraints
+- Optional current task file
+
+## Output
 
 ```md
 ## Route
 
 - Request type:
+- User outcome:
 - Recommended next step:
 - Minimum context needed:
 - Missing information:
 - Do not do yet:
 ```
 
-Rules:
+For token-sensitive work, use the compact route shape:
+
+```text
+INTENT:
+OUTCOME:
+NEXT:
+CTX:
+MISS:
+STOP:
+```
+
+## Rules
 
 - Do not edit code.
-- Do not over-read the repository.
-- Ask only for context needed by the next step.
-- If task is already clear and user wants code, route to Front Implementer.
+- Do not generate a full task unless routing says Task Generator is next.
+- Keep context requests narrow.
+- If implementation is already clearly requested and scope is clear, route to Front Implementer.
+- Ask only for blocking missing information.
+- Make user value explicit when it changes implementation decisions.
+- Call out product decisions separately from technical unknowns.
+- Prefer compact fields over prose when routing between skills.

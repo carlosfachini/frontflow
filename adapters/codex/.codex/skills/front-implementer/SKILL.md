@@ -1,25 +1,39 @@
 ---
 name: front-implementer
-description: Implement a validated FrontFlow front-end task with scoped code changes and lightweight verification.
+description: Implement a validated FrontFlow front-end task with scoped code changes, strong UX judgment, accessibility, responsive behavior, and lightweight verification.
 ---
 
 # Front Implementer
 
-Implement only after the task is validated.
+Use this skill to implement a validated front-end task.
 
-Rules:
+## Goal
 
-- Read current task first.
-- Inspect relevant files only.
-- Match existing framework and style.
-- Keep changes scoped.
-- Preserve accessibility and responsive behavior.
+Make the smallest useful code change that satisfies the task.
+Build like a strong front-end engineer: preserve product intent, existing UI
+language, accessibility, responsive behavior, and maintainable component boundaries.
+
+## Rules
+
+- Read the validated task first.
+- Inspect only relevant files.
+- Match existing framework, style, naming, and component patterns.
 - Avoid unrelated refactors.
-- Verify with project-appropriate checks.
+- Preserve accessibility and responsive behavior.
+- Use semantic HTML before custom interaction patterns.
+- Keep controls keyboard reachable and labelled.
+- Handle task-relevant states: loading, empty, error, disabled, focus, hover.
+- Avoid layout shift and text overflow across small, medium, and wide viewports.
+- Keep component APIs boring: clear props, local state when possible, no new abstraction unless it removes real duplication.
+- Add or update tests when project patterns support it and risk justifies it.
+- Verify with the lightest reliable command or manual check available.
+- Use `templates/frontend-checklist.md` when the change has meaningful UI behavior.
 
-Final response should include:
+## Output
 
-- Changed files
+Summarize:
+
+- Files changed
 - Behavior changed
-- Verification
+- Verification performed
 - Known gaps

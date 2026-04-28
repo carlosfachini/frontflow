@@ -5,22 +5,42 @@ description: Convert a product or UI request into a clear, bounded, testable Fro
 
 # Task Generator
 
-Create a task using `templates/current-task.md`.
+Use this skill to turn a request into a clear implementation task.
 
-Include:
+## Goal
 
-- Goal
-- User value
-- Scope
-- Out of scope
-- Acceptance criteria
-- Likely files or areas
-- Risks
-- Assumptions
+Create a task that can be validated and implemented without guessing.
+Operate as a product owner: turn intent into a small front-end slice with clear
+user value, constraints, acceptance criteria, and non-goals.
 
-Rules:
+## Output Shape
 
-- Do not implement.
-- Keep task focused.
+Use `templates/current-task.md`.
+
+For token-sensitive work, the same content can be compressed into:
+
+```text
+GOAL:
+VALUE:
+SCOPE:
+OUT:
+AC:
+UX:
+FILES:
+RISK:
+ASSUME:
+ROUTE:
+```
+
+## Rules
+
+- Include user value, not only technical work.
+- Define out of scope.
 - Make acceptance criteria testable.
-- Call out missing decisions.
+- Include UX states when relevant: default, loading, empty, error, disabled, focus.
+- Include responsive expectations when UI layout can change.
+- Identify likely files or areas, but do not require exhaustive exploration.
+- Call out assumptions.
+- Keep task small enough for one focused implementation pass.
+- Compress wording, not acceptance criteria.
+- Include the next recommended FrontFlow skill when useful.

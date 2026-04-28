@@ -1,6 +1,6 @@
 # FrontFlow Workflow
 
-FrontFlow separates front-end work into five steps so agents do not spend tokens solving the wrong problem.
+FrontFlow separates front-end work into five steps so agents do not spend tokens solving the wrong problem. In Codex, use `frontflow-po` as the default entry point; it runs the product-owner portion compactly and routes to the right step.
 
 ## 1. PO Router
 
@@ -12,6 +12,17 @@ Good output:
 - Missing information
 - Recommended next step
 - Minimum context needed
+
+Compact output:
+
+```text
+INTENT:
+OUTCOME:
+NEXT:
+CTX:
+MISS:
+STOP:
+```
 
 ## 2. Task Generator
 
@@ -25,6 +36,21 @@ Good output:
 - Acceptance criteria
 - Candidate files
 - Risks
+
+Compact output:
+
+```text
+GOAL:
+VALUE:
+SCOPE:
+OUT:
+AC:
+UX:
+FILES:
+RISK:
+ASSUME:
+ROUTE:
+```
 
 ## 3. Task Validator
 
@@ -55,3 +81,24 @@ Review should consider:
 ## Handoff Contract
 
 Each step should produce enough output for the next step, but not dump unnecessary context. This is how FrontFlow saves tokens: it sends the right information at the right time.
+
+When a request needs another skill, the current step should recommend it in
+`ROUTE` after the task is clear. The route is a handoff instruction, not a reason
+to skip validation.
+
+For Codex, `frontflow-po` packages this contract as the recommended compact skill:
+
+```text
+INTENT -> TASK -> VALIDATE -> ROUTE
+```
+
+## Source Of Truth
+
+The canonical skill text lives in `skills/*.md`. Regenerate Codex skill folders with:
+
+```sh
+scripts/sync-codex-skills.sh
+```
+
+Do not hand-edit generated `adapters/codex/.codex/skills/*/SKILL.md` files unless
+you also update the matching file in `skills/`.

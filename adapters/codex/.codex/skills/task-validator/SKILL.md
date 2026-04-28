@@ -1,3 +1,8 @@
+---
+name: task-validator
+description: Validate a generated FrontFlow task before implementation, checking product clarity, scope, acceptance criteria, UX states, accessibility, and responsive expectations.
+---
+
 # Task Validator
 
 Use this skill to check whether a generated task is ready for implementation.

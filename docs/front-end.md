@@ -37,3 +37,6 @@ Before calling a task done, check:
 - Does it avoid unrelated changes?
 - Does it handle edge states?
 - Can another developer understand the change quickly?
+
+For structured implementation or review passes, use
+`templates/frontend-checklist.md`.

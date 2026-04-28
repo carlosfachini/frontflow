@@ -22,6 +22,16 @@ Explain why this matters to the user or team.
 - [ ] Relevant edge states are covered.
 - [ ] UI behavior is clear across supported viewports.
 
+## UX And States
+
+- Default:
+- Loading:
+- Empty:
+- Error:
+- Disabled:
+- Focus and keyboard:
+- Responsive:
+
 ## Likely Files Or Areas
 
 - Area:
@@ -41,3 +51,7 @@ Explain why this matters to the user or team.
 ## Verification Plan
 
 - Check:
+
+## Next Route
+
+- Route:

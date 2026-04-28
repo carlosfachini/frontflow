@@ -31,6 +31,14 @@
 - Manual checks:
 - Not checked:
 
+## Front-End Checklist
+
+- [ ] Product fit checked.
+- [ ] UX states checked.
+- [ ] Accessibility checked.
+- [ ] Responsive layout checked.
+- [ ] Maintainability checked.
+
 ## Residual Risk
 
 - Risk:

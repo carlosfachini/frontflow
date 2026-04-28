@@ -5,6 +5,9 @@ Use this skill to review a completed front-end task.
 ## Goal
 
 Find bugs, regressions, accessibility issues, visual risks, and maintainability problems.
+Review like a senior front-end reviewer: compare implementation against product
+intent, acceptance criteria, UI states, accessibility, responsiveness, and local
+patterns.
 
 ## Review Order
 
@@ -12,8 +15,9 @@ Find bugs, regressions, accessibility issues, visual risks, and maintainability 
 2. Accessibility
 3. Responsive layout
 4. State, loading, empty, and error cases
-5. Maintainability
-6. Verification gaps
+5. Visual consistency with existing UI
+6. Maintainability
+7. Verification gaps
 
 ## Output
 
@@ -38,3 +42,5 @@ Lead with findings. If no issues are found, say so and list residual risk.
 - Do not rewrite code unless asked.
 - Prefer precise file and line references.
 - Do not spend tokens summarizing unchanged code.
+- Do not approve vague "looks good" results; state what was checked and what remains risky.
+- Use `templates/frontend-checklist.md` when a structured quality pass helps.
