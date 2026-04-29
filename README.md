@@ -149,7 +149,7 @@ Recommended compact entry:
 
 ```text
 Use frontflow-po.
-INTENT -> TASK -> VALIDATE -> ROUTE.
+INTENT -> templates/current-task.md -> VALIDATE -> ROUTE.
 ```
 
 Expanded sequence:
@@ -168,7 +168,7 @@ Compact before/after:
 Before:
 Make header better on mobile.
 
-After:
+After task file exists:
 GOAL: improve mobile header nav.
 VALUE: users find pages on 360px+ screens.
 SCOPE: menu open/close, focus, layout.

@@ -26,7 +26,8 @@ STOP:
 
 ## 2. Task Generator
 
-The Task Generator turns intent into a concrete task. It writes a task that a human or agent can execute without guessing.
+The Task Generator turns intent into a concrete task. It writes
+`templates/current-task.md` so a human or agent can execute without guessing.
 
 Good output:
 
@@ -37,7 +38,7 @@ Good output:
 - Candidate files
 - Risks
 
-Compact output:
+Compact handoff after the task file exists:
 
 ```text
 GOAL:
@@ -82,6 +83,10 @@ Review should consider:
 
 Each step should produce enough output for the next step, but not dump unnecessary context. This is how FrontFlow saves tokens: it sends the right information at the right time.
 
+For implementation work, the task artifact is the handoff source of truth:
+`templates/current-task.md`. Compact inline fields can summarize it, but they do
+not replace it.
+
 When a request needs another skill, the current step should recommend it in
 `ROUTE` after the task is clear. The route is a handoff instruction, not a reason
 to skip validation.
@@ -89,7 +94,7 @@ to skip validation.
 For Codex, `frontflow-po` packages this contract as the recommended compact skill:
 
 ```text
-INTENT -> TASK -> VALIDATE -> ROUTE
+INTENT -> templates/current-task.md -> VALIDATE -> ROUTE
 ```
 
 ## Source Of Truth

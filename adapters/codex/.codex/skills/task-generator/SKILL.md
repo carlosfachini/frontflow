@@ -15,9 +15,12 @@ user value, constraints, acceptance criteria, and non-goals.
 
 ## Output Shape
 
-Use `templates/current-task.md`.
+Use `templates/current-task.md`. For implementation work, create or update that
+file before validation or coding.
 
-For token-sensitive work, the same content can be compressed into:
+For token-sensitive work, you may summarize the task inline after the file is
+written, but the inline version does not replace `templates/current-task.md`.
+Use this summary shape only for handoff/status:
 
 ```text
 GOAL:
@@ -34,6 +37,10 @@ ROUTE:
 
 ## Rules
 
+- Write the task artifact to `templates/current-task.md` for front-end
+  implementation requests.
+- Do not let a compact inline `TASK:` / `AC:` response stand in for the task
+  artifact.
 - Include user value, not only technical work.
 - Define out of scope.
 - Make acceptance criteria testable.
